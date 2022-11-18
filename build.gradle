@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+group 'net.populatorscanner'
+version '0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'net.bytebuddy:byte-buddy:1.12.12'
+
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Can-Redefine-Classes'     : 'true',
+                'Can-Retransform-Classes'     : 'true',
+                'Premain-Class'     : 'test.Agent'
+        )
+    }
+
+    from {
+        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
