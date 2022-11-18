@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'net.populatorscanner'
-version '0.1-SNAPSHOT'
+version '0.1-BETA'
 
 repositories {
     mavenCentral()
